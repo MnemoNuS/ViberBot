@@ -1,0 +1,88 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{BDBC8262-6740-4A94-925D-EF1E87F39EFB}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>ViberBot</RootNamespace>
+    <AssemblyName>ViberBot</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\..\BotPlatformProject\packages\Newtonsoft.Json.12.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Runtime.Serialization.Primitives, Version=4.1.2.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\..\BotPlatformProject\packages\System.Runtime.Serialization.Primitives.4.3.0\lib\net46\System.Runtime.Serialization.Primitives.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Client\Actions\ActionBase.cs" />
+    <Compile Include="Client\Actions\DefaultAction.cs" />
+    <Compile Include="Client\Actions\GreetingsAction.cs" />
+    <Compile Include="Client\Actions\HelpAction.cs" />
+    <Compile Include="Client\Actions\MenuAction.cs" />
+    <Compile Include="Client\Actions\SendContactsAction.cs" />
+    <Compile Include="Client\Actions\SendDataAction.cs" />
+    <Compile Include="Client\Actions\SetFlatNumberAction.cs" />
+    <Compile Include="Client\ClientSettings.cs" />
+    <Compile Include="Client\Enums\ActionType.cs" />
+    <Compile Include="Client\Enums\BotError.cs" />
+    <Compile Include="Client\Enums\DataField.cs" />
+    <Compile Include="Client\Handlers\GoogleSheetsHandler.cs" />
+    <Compile Include="Client\Handlers\KeyboardHandler.cs" />
+    <Compile Include="Client\Handlers\TableDataHandler.cs" />
+    <Compile Include="Client\ViberBotClient.cs" />
+    <Compile Include="Client\ViberBotTrackingData.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\IWebhookService.cs" />
+    <Compile Include="Services\WebhookService.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\GoogleSheetsLib\trunk\GoogleSheetsLib.csproj">
+      <Project>{f819d0c6-91fc-49e4-8ed7-bd4ad06e5ed7}</Project>
+      <Name>GoogleSheetsLib</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\ViberBotLib\trunk\ViberBotLib.csproj">
+      <Project>{224e3965-c94e-40ab-b010-0aaf6186b2a2}</Project>
+      <Name>ViberBotLib</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>
