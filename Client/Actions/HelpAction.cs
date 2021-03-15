@@ -45,7 +45,7 @@ namespace ViberBot.Client.Actions
 
 			await client.SendMessage(receiver, filemessage);
 
-			DefaultAction.Execute(data);
+			await DefaultAction.Execute(data);
 		}
 	}
 }

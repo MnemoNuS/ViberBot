@@ -8,6 +8,7 @@ namespace ViberBot.Client
 	public class ClientSettings
 	{
 		public string Domain { get; set; }
+		public string Webhook { get; set; }
 		public string Token { get; set; }
 		public string ApplicationName { get; set; }
 		public string SpreadsheetId { get; set; }

@@ -19,7 +19,7 @@ namespace ViberBot
 	public class ViberBotClient : IViberClient
 	{
 		//https://github.com/Viber/sample-bot-isitup/blob/master/src/index.js
-		//ngrok http -host-header=localhost:53184 53184
+		//ngrok http -host-header=localhost:44337 44337
 
 		public UserBase BotUserData = new UserBase { Name = "Bot", Avatar = "" };
 
@@ -30,13 +30,16 @@ namespace ViberBot
 		public Action<CallbackData> OnMessage;
 
 		public ClientSettings Settings;
+		public bool WebhookReady { get; private set; }
 
 		private string _viberAuthToken = "";
 		private static ViberBotClient _instance;
+		private ICollection<EventType> _eventTypes;
 		public static ViberBotClient GetInstance()
 		{
 			if (_instance == null)
 				throw new NullReferenceException();
+
 			return _instance;
 		}
 		public static ViberBotClient Init(string token, ClientSettings settings)
@@ -54,9 +57,15 @@ namespace ViberBot
 		}
 		public async Task<ICollection<EventType>> SetWebhookAsync(string url, ICollection<EventType> eventTypes = null)
 		{
+			_eventTypes = eventTypes;
+
 			var requestData = new ViberBotLib.Models.Request.SetWebhook { Url = url, EventTypes = eventTypes, SendName = true, SendPhoto = true };
+
 			var responseString = await SendRequest(_setWevhookUrl, Newtonsoft.Json.JsonConvert.SerializeObject(requestData));
 			var responseData = Newtonsoft.Json.JsonConvert.DeserializeObject<ViberBotLib.Models.Response.WebhookResponse>(responseString);
+
+			_instance.WebhookReady = responseData.EventTypes != null;
+
 			return responseData.EventTypes;
 		}
 		public bool ValidateWebhookHash(string signatureHeader, string jsonMessage)

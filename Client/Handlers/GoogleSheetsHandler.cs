@@ -1,9 +1,9 @@
-﻿using System;
+﻿using GoogleSheetsLib;
+using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
-using ViberBotGoogleSheets;
 using ViberBotLib.Models;
 
 namespace ViberBot.Client.Handlers
@@ -18,12 +18,12 @@ namespace ViberBot.Client.Handlers
 		private static string whoColName = "Имя";
 		private static string contactsColName = "Контактный номер";
 
-		public static GoogleSheetsClient InitGoogleSheetsClient(string appName, string spresdsheetId)
+		public static GoogleSheetsClient InitGoogleSheetsClient(string appName, string spresdsheetId, string secrets_file)
 		{
 			//настроить загрузку через конфиг
 			string defaultSheet = DateTime.Now.Year.ToString();
 
-			var googleSheetsClient = GoogleSheetsClient.Init(appName, spresdsheetId, defaultSheet);
+			var googleSheetsClient = GoogleSheetsClient.Init(appName, spresdsheetId, defaultSheet, secrets_file);
 
 			googleSheetsClient.BeforeAction += CheckDefaultSheet;
 
